@@ -1,0 +1,36 @@
+﻿#English Language File by pome
+item.cp_black.name=Black Colored Pipe
+item.cp_red.name=Red Colored Pipe
+item.cp_green.name=Green Colored Pipe
+item.cp_brown.name=Brown Colored Pipe
+item.cp_blue.name=Blue Colored Pipe
+item.cp_purple.name=Purple Colored Pipe
+item.cp_cyan.name=Cyan Colored Pipe
+item.cp_lgray.name=Light Gray Colored Pipe
+item.cp_gray.name=Gray Colored Pipe
+item.cp_pink.name=Pink Colored Pipe
+item.cp_lgreen.name=Light Green Colored Pipe
+item.cp_yellow.name=Yellow Colored Pipe
+item.cp_lblue.name=Light Blue Colored Pipe
+item.cp_magenta.name=Magenta Colored Pipe
+item.cp_orange.name=Orange Colored Pipe
+item.cp_white.name=White Colored Pipe
+#ToolTips
+tip.PipeItemsBlack=Can't connect to,Colored Pipes except black one.
+tip.PipeItemsRed=Can't connect to,Colored Pipes except red one.
+tip.PipeItemsGreen=Can't connect to,Colored Pipes except green one.
+tip.PipeItemsBrown=Can't connect to,Colored Pipes except brown one.
+tip.PipeItemsBlue=Can't connect to,Colored Pipes except blue one.
+tip.PipeItemsPurple=Can't connect to,Colored Pipes except purple one.
+tip.PipeItemsBan=Can't connect to,Colored Pipes except cyan one.
+tip.PipeItemsLightGray=Can't connect to,Colored Pipes except light gray one.
+tip.PipeItemsGray=Can't connect to,Colored Pipes except gray one.
+tip.PipeItemsPink=Can't connect to,Colored Pipes except pink one.
+tip.PipeItemsLightGreen=Can't connect to,Colored Pipes except light green one.
+tip.PipeItemsYellow=Can't connect to,Colored Pipes except yellow one.
+tip.PipeItemsLightBlue=Can't connect to,Colored Pipes except light blue one.
+tip.PipeItemsMagenta=Can't connect to,Colored Pipes except magenta one.
+tip.PipeItemsOrange=Can't connect to,Colored Pipes except orange one.
+tip.PipeItemsWhite=Can't connect to,Colored Pipes except white one.
+#CreativeTab
+itemGroup.buildcraft.ColoredPipes=ColoredPipes

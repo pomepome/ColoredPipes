@@ -1,0 +1,16 @@
+[
+{
+  "modid": "Colored Pipes",
+  "name": "Colored Pipes",
+  "description": "Adds colored pipes.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["pome"],
+  "credits": "The Forge and FML guys,and developpers of BuildCraft",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": [BuildCraft|Transport]
+}
+]
