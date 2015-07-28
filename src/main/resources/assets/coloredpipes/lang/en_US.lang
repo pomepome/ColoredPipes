@@ -15,22 +15,50 @@ item.cp_lblue.name=Light Blue Colored Pipe
 item.cp_magenta.name=Magenta Colored Pipe
 item.cp_orange.name=Orange Colored Pipe
 item.cp_white.name=White Colored Pipe
+
+#Brushes
+item.pbrush.name=Painting Brush
+item.cbrush.name=Colored Painting Brush
+
+#Brushes Tips
+cp.color=Color
+cp.preLeft=
+cp.left= uses left
+
+#Brushes Colors
+cp.colors.black=Black
+cp.colors.red=Red
+cp.colors.green=Green
+cp.colors.brown=Brown
+cp.colors.blue=Blue
+cp.colors.purple=Purple
+cp.colors.cyan=Cyan
+cp.colors.lgray=Light Gray
+cp.colors.gray=Gray
+cp.colors.pink=Pink
+cp.colors.lgreen=Light Green
+cp.colors.yellow=Yellow
+cp.colors.lblue=Light Blue
+cp.colors.magenta=Magenta
+cp.colors.orange=Orange
+cp.colors.white=White
+
 #ToolTips
-tip.PipeItemsBlack=Can't connect to,Colored Pipes except black one.
-tip.PipeItemsRed=Can't connect to,Colored Pipes except red one.
-tip.PipeItemsGreen=Can't connect to,Colored Pipes except green one.
-tip.PipeItemsBrown=Can't connect to,Colored Pipes except brown one.
-tip.PipeItemsBlue=Can't connect to,Colored Pipes except blue one.
-tip.PipeItemsPurple=Can't connect to,Colored Pipes except purple one.
-tip.PipeItemsBan=Can't connect to,Colored Pipes except cyan one.
-tip.PipeItemsLightGray=Can't connect to,Colored Pipes except light gray one.
-tip.PipeItemsGray=Can't connect to,Colored Pipes except gray one.
-tip.PipeItemsPink=Can't connect to,Colored Pipes except pink one.
-tip.PipeItemsLightGreen=Can't connect to,Colored Pipes except light green one.
-tip.PipeItemsYellow=Can't connect to,Colored Pipes except yellow one.
-tip.PipeItemsLightBlue=Can't connect to,Colored Pipes except light blue one.
-tip.PipeItemsMagenta=Can't connect to,Colored Pipes except magenta one.
-tip.PipeItemsOrange=Can't connect to,Colored Pipes except orange one.
-tip.PipeItemsWhite=Can't connect to,Colored Pipes except white one.
+tip.PipeItemsBlack=Can't connect to,colorsed Pipes except black one.
+tip.PipeItemsRed=Can't connect to,colorsed Pipes except red one.
+tip.PipeItemsGreen=Can't connect to,colorsed Pipes except green one.
+tip.PipeItemsBrown=Can't connect to,colorsed Pipes except brown one.
+tip.PipeItemsBlue=Can't connect to,colorsed Pipes except blue one.
+tip.PipeItemsPurple=Can't connect to,colorsed Pipes except purple one.
+tip.PipeItemsBan=Can't connect to,colorsed Pipes except cyan one.
+tip.PipeItemsLightGray=Can't connect to,colorsed Pipes except light gray one.
+tip.PipeItemsGray=Can't connect to,colorsed Pipes except gray one.
+tip.PipeItemsPink=Can't connect to,colorsed Pipes except pink one.
+tip.PipeItemsLightGreen=Can't connect to,colorsed Pipes except light green one.
+tip.PipeItemsYellow=Can't connect to,colorsed Pipes except yellow one.
+tip.PipeItemsLightBlue=Can't connect to,colorsed Pipes except light blue one.
+tip.PipeItemsMagenta=Can't connect to,colorsed Pipes except magenta one.
+tip.PipeItemsOrange=Can't connect to,colorsed Pipes except orange one.
+tip.PipeItemsWhite=Can't connect to,colorsed Pipes except white one.
 #CreativeTab
 itemGroup.buildcraft.ColoredPipes=ColoredPipes

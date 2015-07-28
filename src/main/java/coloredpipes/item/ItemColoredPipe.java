@@ -13,7 +13,8 @@ import net.minecraft.util.StatCollector;
 
 public class ItemColoredPipe extends ItemPipe
 {
-	public ItemColoredPipe(BCCreativeTab creativeTab) {
+	public ItemColoredPipe(BCCreativeTab creativeTab)
+	{
 		super(creativeTab);
 	}
 	@Override

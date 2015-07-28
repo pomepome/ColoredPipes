@@ -15,6 +15,34 @@ item.cp_lblue.name=水色パイプ
 item.cp_magenta.name=赤紫パイプ
 item.cp_orange.name=橙色パイプ
 item.cp_white.name=白パイプ
+
+#Brushes
+item.pbrush.name=刷毛
+item.cbrush.name=染料を塗った刷毛
+
+#Brushes Tips
+cp.color=色
+cp.preLeft=残り: 
+cp.left=回
+
+#Brushes Colors
+cp.colors.black=黒
+cp.colors.red=赤
+cp.colors.green=緑
+cp.colors.brown=茶色
+cp.colors.blue=青
+cp.colors.purple=紫
+cp.colors.cyan=シアン
+cp.colors.lgray=薄灰色
+cp.colors.gray=灰色
+cp.colors.pink=桃色
+cp.colors.lgreen=黄緑
+cp.colors.yellow=黄色
+cp.colors.lblue=水色
+cp.colors.magenta=マゼンタ
+cp.colors.orange=橙色
+cp.colors.white=白
+
 #ToolTips
 tip.PipeItemsBlack=黒パイプ以外の着色パイプと繋がりません
 tip.PipeItemsRed=赤パイプ以外の着色パイプと繋がりません
@@ -32,5 +60,6 @@ tip.PipeItemsLightBlue=水色パイプ以外の着色パイプと繋がりませ
 tip.PipeItemsMagenta=赤紫パイプ以外の着色パイプと繋がりません
 tip.PipeItemsOrange=橙色パイプ以外の着色パイプと繋がりません
 tip.PipeItemsWhite=白パイプ以外の着色パイプと繋がりません
+
 #CreativeTab
 itemGroup.buildcraft.ColoredPipes=着色パイプ
