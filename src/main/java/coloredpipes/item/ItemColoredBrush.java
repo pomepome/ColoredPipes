@@ -16,6 +16,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -24,6 +26,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -45,7 +49,10 @@ public class ItemColoredBrush extends Item
 			"Light Blue","Magenta","Orange","White"
 		};
 	}
-
+	public static int getMaxUse()
+	{
+		return maxUse;
+	}
 	/*
 	 * Crefting methods
 	 */
@@ -134,6 +141,46 @@ public class ItemColoredBrush extends Item
         return (double)damage / (double)(maxUse + 1);
     }
 
+    /*
+     * Entity clicked method
+     */
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+    {
+    	ItemStack result = stack.copy();
+    	MovingObjectPosition mop = getMovingObjectPositionFromPlayer(world, player, true);
+    	if(mop != null && mop.typeOfHit == MovingObjectType.ENTITY)
+    	{
+    		Entity entity = mop.entityHit;
+    		if(entity instanceof EntitySheep)
+    		{
+    			EntitySheep sheep = (EntitySheep)entity;
+    			int brushCol = stack.getItemDamage();
+    			int sheepCol = 0xf -  sheep.getFleeceColor();
+    			if(sheepCol != brushCol)
+    			{
+    				sheep.setFleeceColor(0xf - brushCol);
+    				int brushDamage = getDurability(stack) + 1;
+    				if(brushDamage < maxUse)
+    				{
+    					setDurability(result, brushDamage);
+    				}
+    				else
+    				{
+    					ItemStack dye = new ItemStack(Items.dye, 1, brushCol);
+    					if(ColoredPipes.autoRefill && useResource(player.inventory, dye, true))
+    					{
+    						setDurability(result, 0);
+    					}
+    					else
+    					{
+    						result = new ItemStack(ColoredPipes.pBrush);
+    					}
+    				}
+    			}
+    		}
+    	}
+    	return result;
+    }
     /*
      * Block clicked method
      */

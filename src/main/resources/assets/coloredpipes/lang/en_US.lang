@@ -50,6 +50,7 @@ tip.PipeItemsGreen=Can't connect to,colorsed Pipes except green one.
 tip.PipeItemsBrown=Can't connect to,colorsed Pipes except brown one.
 tip.PipeItemsBlue=Can't connect to,colorsed Pipes except blue one.
 tip.PipeItemsPurple=Can't connect to,colorsed Pipes except purple one.
+tip.PipeItemsCyan=Can't connect to,colorsed Pipes except cyan one.
 tip.PipeItemsBan=Can't connect to,colorsed Pipes except cyan one.
 tip.PipeItemsLightGray=Can't connect to,colorsed Pipes except light gray one.
 tip.PipeItemsGray=Can't connect to,colorsed Pipes except gray one.

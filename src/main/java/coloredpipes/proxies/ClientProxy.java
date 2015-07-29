@@ -51,6 +51,10 @@ public class ClientProxy extends CommonProxy
 					BuildCraftTransport.pipeItemsCobblestone,
 					pb
 			);
+			GameRegistry.addShapelessRecipe(new ItemStack(BuildCraftTransport.pipeItemsCobblestone),
+				pipesColored[i],
+				Items.water_bucket
+			);
 
 		}
 		ColoredPipes.addCleanRecipe(new ItemStack(ColoredPipes.pBrush),
