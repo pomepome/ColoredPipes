@@ -6,6 +6,7 @@ import buildcraft.BuildCraftTransport;
 import buildcraft.core.BCCreativeTab;
 import buildcraft.transport.BlockGenericPipe;
 import buildcraft.transport.ItemPipe;
+import coloredpipes.ColoredPipes;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
@@ -35,6 +36,10 @@ public class ItemColoredPipe extends ItemPipe
 	@Override
 	public boolean onEntityItemUpdate(EntityItem entityItem)
     {
+		if(!ColoredPipes.discolored)
+    	{
+    		return false;
+    	}
 		int x,y,z;
 		World w = entityItem.worldObj;
 		if(w.isRemote)
@@ -44,10 +49,11 @@ public class ItemColoredPipe extends ItemPipe
 		x = (int)Math.floor(entityItem.posX);
 		y = (int)Math.ceil(entityItem.posY - entityItem.getYOffset());
 		z = (int)Math.floor(entityItem.posZ);
+		int count = entityItem.getEntityItem().stackSize;
 		if(w.getBlock((int)x, (int)y, (int)z).getMaterial() == Material.water || w.canLightningStrikeAt(x, y, z))
 		{
 			entityItem.setDead();
-			ItemStack pipe = new ItemStack(BuildCraftTransport.pipeItemsCobblestone);
+			ItemStack pipe = new ItemStack(BuildCraftTransport.pipeItemsCobblestone, count);
 			EntityItem eItem = new EntityItem(w, x, y, z, pipe);
 			eItem.motionX = 0;
 			eItem.motionY = 0;

@@ -17,6 +17,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -58,6 +59,7 @@ public class ColoredPipes
 	 */
 	public static boolean connectAny;
 	public static boolean autoRefill;
+	public static boolean discolored;
 
 	@EventHandler
 	public void init(FMLInitializationEvent e)
@@ -77,11 +79,17 @@ public class ColoredPipes
 		MinecraftForge.EVENT_BUS.register(this);
 		proxy.onPreInit(e);
 	}
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent e)
+	{
+		proxy.onPostInit(e);
+	}
 	public void loadConfig(Configuration config)
 	{
 		config.load();
 		connectAny = config.getBoolean("connectAny", "pipes", false, "whether Colored Pipes will connect to stone pipes or not");
 		autoRefill = config.getBoolean("autoRefill", "misc", false, "wether Colored Brush will refeill automatically when run out of dies or not");
+		discolored = config.getBoolean("discolored", "misc", false, "wether Colored Brush or Colored Pipes will become discolored for water");
 		config.save();
 	}
 	public void registerColoredPipes()

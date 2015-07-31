@@ -14,9 +14,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -309,5 +311,36 @@ public class ItemColoredBrush extends Item
     public static void setDurability(ItemStack stack,int damage)
     {
     	stack.stackTagCompound.setByte("Damage",(byte)damage);
+    }
+    /*
+     * EntityItem Update method
+     */
+    @Override
+	public boolean onEntityItemUpdate(EntityItem entityItem)
+    {
+    	if(!ColoredPipes.discolored)
+    	{
+    		return false;
+    	}
+		int x,y,z;
+		World w = entityItem.worldObj;
+		if(w.isRemote)
+		{
+			return false;
+		}
+		x = (int)Math.floor(entityItem.posX);
+		y = (int)Math.ceil(entityItem.posY - entityItem.getYOffset());
+		z = (int)Math.floor(entityItem.posZ);
+		if(w.getBlock((int)x, (int)y, (int)z).getMaterial() == Material.water || w.canLightningStrikeAt(x, y, z))
+		{
+			entityItem.setDead();
+			ItemStack pBrush = new ItemStack(ColoredPipes.pBrush);
+			EntityItem eItem = new EntityItem(w, x, y, z, pBrush);
+			eItem.motionX = 0;
+			eItem.motionY = 0;
+			eItem.motionZ = 0;
+			w.spawnEntityInWorld(eItem);
+		}
+		return false;
     }
 }
