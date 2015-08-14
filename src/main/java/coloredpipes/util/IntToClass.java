@@ -1,4 +1,4 @@
-package coloredpipes;
+package coloredpipes.util;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,35 +8,37 @@ import buildcraft.transport.Pipe;
 import buildcraft.transport.TileGenericPipe;
 import buildcraft.transport.pipes.PipeItemsCobblestone;
 import coloredpipes.ColoredPipes;
-import coloredpipes.IntToString;
 import coloredpipes.pipes.PipeItemsBlack;
+import coloredpipes.util.IntToString;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockColored;
+import net.minecraft.block.BlockGlass;
+import net.minecraft.block.BlockHardenedClay;
+import net.minecraft.block.BlockPane;
+import net.minecraft.block.BlockStainedGlass;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class ItemColoredBrush extends Item
 {
 	private IIcon[] icons = new IIcon[16];
-	private static final int maxUse = 64;
+	public static final int maxUse = 64;
 	private final String[] colors;
 
 	public ItemColoredBrush()
@@ -142,47 +144,6 @@ public class ItemColoredBrush extends Item
     	double damage = (double)stack.getTagCompound().getByte("Damage");
         return (double)damage / (double)(maxUse + 1);
     }
-
-    /*
-     * Entity clicked method
-     */
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
-    {
-    	ItemStack result = stack.copy();
-    	MovingObjectPosition mop = getMovingObjectPositionFromPlayer(world, player, true);
-    	if(mop != null && mop.typeOfHit == MovingObjectType.ENTITY)
-    	{
-    		Entity entity = mop.entityHit;
-    		if(entity instanceof EntitySheep)
-    		{
-    			EntitySheep sheep = (EntitySheep)entity;
-    			int brushCol = stack.getItemDamage();
-    			int sheepCol = 0xf -  sheep.getFleeceColor();
-    			if(sheepCol != brushCol)
-    			{
-    				sheep.setFleeceColor(0xf - brushCol);
-    				int brushDamage = getDurability(stack) + 1;
-    				if(brushDamage < maxUse)
-    				{
-    					setDurability(result, brushDamage);
-    				}
-    				else
-    				{
-    					ItemStack dye = new ItemStack(Items.dye, 1, brushCol);
-    					if(ColoredPipes.autoRefill && useResource(player.inventory, dye, true))
-    					{
-    						setDurability(result, 0);
-    					}
-    					else
-    					{
-    						result = new ItemStack(ColoredPipes.pBrush);
-    					}
-    				}
-    			}
-    		}
-    	}
-    	return result;
-    }
     /*
      * Block clicked method
      */
@@ -214,30 +175,71 @@ public class ItemColoredBrush extends Item
     		{
     			return true;
     		}
-    		if(player.capabilities.isCreativeMode)
+    		brushDamaging(stack, player, color);
+    	}
+    	if(world.getBlock(x, y, z) instanceof BlockColored)
+    	{
+    		int blockCol = 0xf - world.getBlockMetadata(x, y, z);
+    		if(color != blockCol)
     		{
-    			return true;
+    			brushDamaging(stack,player,color);
+    			world.setBlockMetadataWithNotify(x, y, z, 0xf - color, 2);
     		}
-    		if(getDurability(stack) + 1 < maxUse)
+    	}
+    	if(world.getBlock(x, y, z) instanceof BlockHardenedClay)
+    	{
+    		brushDamaging(stack,player,color);
+    		world.setBlock(x, y, z, Blocks.stained_hardened_clay);
+    		world.setBlockMetadataWithNotify(x, y, z, 0xf - color, 2);
+    	}
+    	if(world.getBlock(x, y, z) instanceof BlockGlass)
+    	{
+    		brushDamaging(stack,player,color);
+    		world.setBlock(x, y, z, Blocks.stained_glass);
+    		world.setBlockMetadataWithNotify(x, y, z, 0xf - color, 2);
+    	}
+    	if(world.getBlock(x, y, z) instanceof BlockPane)
+    	{
+    		brushDamaging(stack,player,color);
+    		world.setBlock(x, y, z, Blocks.stained_glass_pane);
+    		world.setBlockMetadataWithNotify(x, y, z, 0xf - color, 2);
+    	}
+    	if(world.getBlock(x, y, z) instanceof BlockStainedGlass)
+    	{
+    		int blockCol = 0xf - world.getBlockMetadata(x, y, z);
+    		if(color != blockCol)
     		{
-    			setDurability(stack,getDurability(stack) + 1);
-    		}
-    		else
-    		{
-    			ItemStack dye = new ItemStack(Items.dye, 1, color);
-    			if(ColoredPipes.autoRefill && useResource(player.inventory,dye,true))
-    			{
-    				setDurability(stack,0);
-    			}
-    			else
-    			{
-    				int currentIndex = player.inventory.currentItem;
-    				player.inventory.mainInventory[currentIndex] = new ItemStack(ColoredPipes.pBrush);
-    			}
+    			brushDamaging(stack,player,color);
+    			world.setBlock(x, y, z, Blocks.stained_glass);
+    			world.setBlockMetadataWithNotify(x, y, z, 0xf - color, 2);
     		}
     	}
     	return true;
     }
+	private void brushDamaging(ItemStack stack, EntityPlayer player, int color)
+	{
+		if(player.capabilities.isCreativeMode)
+		{
+			return;
+		}
+		if(getDurability(stack) + 1 < maxUse)
+		{
+			setDurability(stack,getDurability(stack) + 1);
+		}
+		else
+		{
+			ItemStack dye = new ItemStack(Items.dye, 1, color);
+			if(ColoredPipes.autoRefill && useResource(player.inventory,dye,true))
+			{
+				setDurability(stack,0);
+			}
+			else
+			{
+				int currentIndex = player.inventory.currentItem;
+				player.inventory.mainInventory[currentIndex] = new ItemStack(ColoredPipes.pBrush);
+			}
+		}
+	}
     /*
      * ToolTip methods
      */
@@ -318,7 +320,7 @@ public class ItemColoredBrush extends Item
     @Override
 	public boolean onEntityItemUpdate(EntityItem entityItem)
     {
-    	if(!ColoredPipes.discolored)
+		if(!ColoredPipes.discolored)
     	{
     		return false;
     	}
@@ -334,8 +336,7 @@ public class ItemColoredBrush extends Item
 		if(w.getBlock((int)x, (int)y, (int)z).getMaterial() == Material.water || w.canLightningStrikeAt(x, y, z))
 		{
 			entityItem.setDead();
-			ItemStack pBrush = new ItemStack(ColoredPipes.pBrush);
-			EntityItem eItem = new EntityItem(w, x, y, z, pBrush);
+			EntityItem eItem = new EntityItem(w, x, y, z, new ItemStack(ColoredPipes.pBrush));
 			eItem.motionX = 0;
 			eItem.motionY = 0;
 			eItem.motionZ = 0;

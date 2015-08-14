@@ -8,30 +8,27 @@ import buildcraft.transport.BlockGenericPipe;
 import buildcraft.transport.ItemPipe;
 import buildcraft.transport.Pipe;
 import buildcraft.transport.TransportProxy;
+import coloredpipes.handler.EntityHandler;
 import coloredpipes.item.ItemColoredBrush;
 import coloredpipes.item.ItemColoredPipe;
 import coloredpipes.item.ItemPlainBrush;
 import coloredpipes.proxies.CommonProxy;
 import coloredpipes.recipe.RecipeCleaning;
+import coloredpipes.util.IntToClass;
+import coloredpipes.util.IntToString;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.event.entity.player.EntityInteractEvent;
 
 @Mod(modid = "ColoredPipes",name="ColoredPipes",version="1.0",dependencies="required-after:BuildCraft|Transport@[7.0.3,)")
 public class ColoredPipes
@@ -76,7 +73,7 @@ public class ColoredPipes
 		coloredBrushes = new ItemColoredBrush();
 		tab.setIcon(new ItemStack(pipesColored[10]));
 		loadConfig(new Configuration(e.getSuggestedConfigurationFile()));
-		MinecraftForge.EVENT_BUS.register(this);
+		MinecraftForge.EVENT_BUS.register(new EntityHandler());
 		proxy.onPreInit(e);
 	}
 	@EventHandler
@@ -140,50 +137,5 @@ public class ColoredPipes
 			}
 		}
 		GameRegistry.addRecipe(new RecipeCleaning(dest,recipeItems));
-	}
-	/*
-	 * Event handlers
-	 */
-	@SubscribeEvent
-	public void onInteract(EntityInteractEvent event)
-	{
-		Entity target = event.target;
-		EntityPlayer p = event.entityPlayer;
-		if(target != null && target instanceof EntitySheep)
-		{
-			EntitySheep sheep = (EntitySheep)target;
-			ItemStack is = p.getCurrentEquippedItem().copy();
-			if(is != null && is.getItem() == coloredBrushes)
-			{
-				int brushColor = is.getItemDamage();
-				int sheepColor = 0xf - sheep.getFleeceColor();
-				if(brushColor != sheepColor)
-				{
-					sheep.setFleeceColor(0xf - brushColor);
-					if(p.capabilities.isCreativeMode)
-					{
-						return;
-					}
-					int brushDamage = ItemColoredBrush.getDurability(is) + 1;
-					if(brushDamage < ItemColoredBrush.getMaxUse())
-					{
-						ItemColoredBrush.setDurability(is, brushDamage);
-					}
-					else
-					{
-						ItemStack dye = new ItemStack(Items.dye, 1, brushColor);
-						if(autoRefill && ItemColoredBrush.useResource(p.inventory, dye, true))
-						{
-							ItemColoredBrush.setDurability(is, 0);
-						}
-						else
-						{
-							is = new ItemStack(pBrush);
-						}
-					}
-				}
-				p.inventory.mainInventory[p.inventory.currentItem] = is;
-			}
-		}
 	}
 }

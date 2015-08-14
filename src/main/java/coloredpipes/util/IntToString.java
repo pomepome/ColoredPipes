@@ -1,4 +1,4 @@
-package coloredpipes;
+package coloredpipes.util;
 
 public class IntToString
 {
