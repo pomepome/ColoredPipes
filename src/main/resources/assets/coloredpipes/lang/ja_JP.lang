@@ -63,4 +63,4 @@ tip.PipeItemsWhite=白パイプ以外の着色パイプと繋がりません
 
 #CreativeTab
 itemGroup.buildcraft.ColoredPipes=着色パイプ(パイプ)
-itemGroup.buildcraft.ColoredPipes-Misc=着色パイプ(その他)
+itemGroup.ColoredPipes-Misc=着色パイプ(その他)
