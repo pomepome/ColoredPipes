@@ -30,7 +30,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
-@Mod(modid = "ColoredPipes",name="ColoredPipes",version="1.0",dependencies="required-after:BuildCraft|Transport@[7.0.3,)")
+@Mod(modid = "ColoredPipesBeta",name="ColoredPipesBeta",version="1.0",dependencies="required-after:BuildCraft|Transport@[7.1.0,)")
 public class ColoredPipes
 {
 	@Mod.Instance

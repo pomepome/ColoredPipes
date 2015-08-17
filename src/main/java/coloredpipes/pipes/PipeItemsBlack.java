@@ -48,16 +48,6 @@ public class PipeItemsBlack extends Pipe<PipeTransportItems>
 		return color;
 	}
 
-	public void setColor(int col)
-	{
-		if(col < 0 || col > 15)
-		{
-			color = 0;
-			return;
-		}
-		color = col;
-	}
-
 	public boolean canPipeConnect(TileEntity tile, ForgeDirection side)
 	{
 		if(tile instanceof IPipeTile)
@@ -74,7 +64,7 @@ public class PipeItemsBlack extends Pipe<PipeTransportItems>
 		}
 		return super.canPipeConnect(tile, side);//適当な値を返しておきます
 	}
-	public void setColor(EntityPlayer player,int toColored)
+	public void setColor(EntityPlayer player,int toColored,int side)
 	{
 		Pipe<?> pipe = BlockGenericPipe.createPipe(ColoredPipes.pipesColored[toColored]);//Pipeオブジェクトを生成します
 		int x = container.xCoord;
@@ -82,6 +72,6 @@ public class PipeItemsBlack extends Pipe<PipeTransportItems>
 		int z = container.zCoord;
 		Block pipeBlock = BuildCraftTransport.genericPipeBlock;
 		getWorld().setBlockToAir(x, y, z);//ないと設置されないようです
-		BlockGenericPipe.placePipe(pipe, getWorld(), x, y, z, pipeBlock, 0, player);//生成したPipeを設置します
+		BlockGenericPipe.placePipe(pipe, getWorld(), x, y, z, pipeBlock, 0, player, ForgeDirection.getOrientation(side));//生成したPipeを設置します
 	}
 }

@@ -34,6 +34,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class ItemColoredBrush extends Item
 {
@@ -160,7 +161,7 @@ public class ItemColoredBrush extends Item
     		{
     			world.setBlockToAir(x, y, z);
     			Pipe newPipe = BlockGenericPipe.createPipe(ColoredPipes.pipesColored[color]);
-    			BlockGenericPipe.placePipe(newPipe, world, x, y, z, pipeBlock, 0, player);
+    			BlockGenericPipe.placePipe(newPipe, world, x, y, z, pipeBlock, 0, player, ForgeDirection.getOrientation(side));
     		}
     		else if(pipe instanceof PipeItemsBlack)
     		{
@@ -169,7 +170,7 @@ public class ItemColoredBrush extends Item
     			{
     				return true;
     			}
-    			newPipe.setColor(player, color);
+    			newPipe.setColor(player, color, side);
     		}
     		else
     		{
