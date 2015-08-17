@@ -8,7 +8,7 @@ public class ItemPlainBrush extends Item
 {
 	public ItemPlainBrush()
 	{
-		this.setUnlocalizedName("pbrush").setCreativeTab(ColoredPipes.instance.tab).setTextureName("coloredpipes:pbrush");
+		this.setUnlocalizedName("pbrush").setCreativeTab(ColoredPipes.instance.tabOthers).setTextureName("coloredpipes:pbrush");
 		GameRegistry.registerItem(this,"pbrush");
 	}
 }

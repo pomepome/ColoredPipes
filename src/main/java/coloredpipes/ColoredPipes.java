@@ -3,11 +3,12 @@ package coloredpipes;
 import java.util.ArrayList;
 import java.util.List;
 
-import buildcraft.core.BCCreativeTab;
 import buildcraft.transport.BlockGenericPipe;
 import buildcraft.transport.ItemPipe;
 import buildcraft.transport.Pipe;
 import buildcraft.transport.TransportProxy;
+import coloredpipes.creativetabs.CreativeTabOthers;
+import coloredpipes.creativetabs.CreativeTabPipes;
 import coloredpipes.handler.EntityHandler;
 import coloredpipes.item.ItemColoredBrush;
 import coloredpipes.item.ItemColoredPipe;
@@ -38,7 +39,8 @@ public class ColoredPipes
 	@SidedProxy(clientSide="coloredpipes.proxies.ClientProxy",serverSide="coloredpipes.proxies.CommonProxy")
 	public static CommonProxy proxy;
 
-	public BCCreativeTab tab;
+	public CreativeTabPipes tabPipes;
+	public CreativeTabOthers tabOthers;
 
 	/*
 	 * Pipes
@@ -67,11 +69,11 @@ public class ColoredPipes
 	public void preInit(FMLPreInitializationEvent e)
 	{
 		pipesColored = new Item[16];
-		tab = new BCCreativeTab("ColoredPipes");
+		tabPipes = new CreativeTabPipes();
 		registerColoredPipes();
 		pBrush = new ItemPlainBrush();
 		coloredBrushes = new ItemColoredBrush();
-		tab.setIcon(new ItemStack(pipesColored[10]));
+		tabPipes.setIcon(new ItemStack(pipesColored[10]));
 		loadConfig(new Configuration(e.getSuggestedConfigurationFile()));
 		MinecraftForge.EVENT_BUS.register(new EntityHandler());
 		proxy.onPreInit(e);
@@ -106,7 +108,7 @@ public class ColoredPipes
 	public Item registerPipe(Class<? extends Pipe<?>> pipeClass,String name)
 	{
 		//BlockGenericPipe.registerPipeと同じ内容です
-		ItemPipe pipe = new ItemColoredPipe(tab);
+		ItemPipe pipe = new ItemColoredPipe(tabPipes);
 		pipe.setUnlocalizedName(name);
 		BlockGenericPipe.pipes.put(pipe, pipeClass);
 		GameRegistry.registerItem(pipe, name);

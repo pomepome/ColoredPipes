@@ -44,7 +44,7 @@ public class ItemColoredBrush extends Item
 
 	public ItemColoredBrush()
 	{
-		this.setUnlocalizedName("cbrush").setCreativeTab(ColoredPipes.instance.tab).setContainerItem(this).setHasSubtypes(true).setMaxDamage(0).setMaxStackSize(1);
+		this.setUnlocalizedName("cbrush").setCreativeTab(ColoredPipes.instance.tabOthers).setContainerItem(this).setHasSubtypes(true).setMaxDamage(0).setMaxStackSize(1);
 		GameRegistry.registerItem(this,"cbrush");
 		colors = new String[]
 		{
