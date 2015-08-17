@@ -6,8 +6,9 @@ import net.minecraft.item.Item;
 
 public class CreativeTabOthers extends CreativeTabs
 {
-	public CreativeTabOthers(String lable) {
-		super(lable);
+	public CreativeTabOthers()
+	{
+		super("ColoredPipes-Misc");
 	}
 
 	@Override

@@ -39,8 +39,8 @@ public class ColoredPipes
 	@SidedProxy(clientSide="coloredpipes.proxies.ClientProxy",serverSide="coloredpipes.proxies.CommonProxy")
 	public static CommonProxy proxy;
 
-	public CreativeTabPipes tabPipes;
-	public CreativeTabOthers tabOthers;
+	public static final CreativeTabPipes tabPipes = new CreativeTabPipes();
+	public static final CreativeTabOthers tabOthers = new CreativeTabOthers();
 
 	/*
 	 * Pipes
@@ -69,7 +69,6 @@ public class ColoredPipes
 	public void preInit(FMLPreInitializationEvent e)
 	{
 		pipesColored = new Item[16];
-		tabPipes = new CreativeTabPipes();
 		registerColoredPipes();
 		pBrush = new ItemPlainBrush();
 		coloredBrushes = new ItemColoredBrush();
