@@ -63,4 +63,4 @@ tip.PipeItemsOrange=Can't connect to,colorsed Pipes except orange one.
 tip.PipeItemsWhite=Can't connect to,colorsed Pipes except white one.
 #CreativeTab
 itemGroup.buildcraft.ColoredPipes-Pipes=ColoredPipes - Pipes
-itemGroup.buildcraft.ColoredPipes-Others=ColoredPipes - Misc
+itemGroup.buildcraft.ColoredPipes-Misc=ColoredPipes - Misc
